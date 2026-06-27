@@ -2,14 +2,14 @@
 
 from fastapi import APIRouter, HTTPException, Query
 
-from models.schemas import (
+from backend.models.schemas import (
     CorpusEmbeddingRequest,
     CorpusEmbeddingResponse,
     CorpusResponse,
     EmbeddingInfoResponse,
     EmbeddingProjectionResponse,
 )
-from services import embedding_service
+from backend.services import embedding_service
 
 
 router = APIRouter(prefix="/api/embeddings", tags=["Embeddings"])
