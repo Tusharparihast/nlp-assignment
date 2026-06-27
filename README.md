@@ -41,7 +41,8 @@ pip install -r requirements.txt
 #### 3. Download the spaCy English model (Required for POS & NER) & NLTK
 ```bash
 python -m spacy download en_core_web_sm
-
+```
+```bash
 python -m nltk.downloader punkt_tab
 ```
 
