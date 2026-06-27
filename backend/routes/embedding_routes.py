@@ -12,7 +12,7 @@ from backend.models.schemas import (
 from backend.services import embedding_service
 
 
-router = APIRouter(prefix="/api/embeddings", tags=["Embeddings"])
+router = APIRouter(prefix="", tags=["Embeddings"])
 
 
 def _handle_service_errors(error: Exception) -> None:
