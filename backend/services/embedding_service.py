@@ -12,7 +12,7 @@ from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.manifold import TSNE
 
-from utils.helpers import normalize_whitespace
+from backend.utils.helpers import normalize_whitespace
 
 
 # A small custom corpus to demonstrate corpus-level embeddings.

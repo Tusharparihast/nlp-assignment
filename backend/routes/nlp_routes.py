@@ -76,6 +76,7 @@ def execute_pos_tagging(input_payload: TextRequest) -> PosTagsResponse:
             }
             for item in raw_tags
         ]
+        # Validated unpacking via keyword assignment to support Pydantic mappings safely
         return PosTagsResponse(pos_tags=formatted_pos)
     except Exception as operational_error:
         _intercept_operational_faults(operational_error)
@@ -105,27 +106,32 @@ def execute_full_analysis(input_payload: TextRequest) -> AnalyzeResponse:
     try:
         computed_matrix = text_engine_service.execute_comprehensive_analysis(input_payload.text)
         
+        # Maps keys completely down the column mapping structure
+        formatted_pos = [
+            {
+                "token": item["word_item"],
+                "pos": item["syntactic_category"],
+                "tag": item["syntactic_category"],
+                "description": item["meta_description"]
+            }
+            for item in computed_matrix["grammatical_tags"]
+        ]
+        
+        formatted_entities = [
+            {
+                "text": item["matched_text"],
+                "label": item["entity_type"],
+                "description": item["type_details"]
+            }
+            for item in computed_matrix["identified_entities"]
+        ]
+
         return AnalyzeResponse(
             tokens=computed_matrix["extracted_tokens"],
             lemmas=computed_matrix["base_lemmas"],
             stems=computed_matrix["word_stems"],
-            pos_tags=[
-                {
-                    "token": item["word_item"],
-                    "pos": item["syntactic_category"],
-                    "tag": item["syntactic_category"],
-                    "description": item["meta_description"]
-                }
-                for item in computed_matrix["grammatical_tags"]
-            ],
-            entities=[
-                {
-                    "text": item["matched_text"],
-                    "label": item["entity_type"],
-                    "description": item["type_details"]
-                }
-                for item in computed_matrix["identified_entities"]
-            ]
+            pos_tags=formatted_pos,
+            entities=formatted_entities
         )
     except Exception as operational_error:
         _intercept_operational_faults(operational_error)

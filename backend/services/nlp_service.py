@@ -58,16 +58,22 @@ class TextEngineService:
         return transformed_stems
 
     def compute_pos_tags(self, raw_string: str) -> list[dict[str, str]]:
-        """Identifies lexical classifications for every component word."""
+        """Identifies lexical classifications for every component word using spaCy pipeline mapping.
+        
+        Bypasses internal TextBlob pickle exceptions on Python 3.14+.
+        """
         normalized = " ".join(raw_string.split())
-        blob = TextBlob(normalized)
+        pipeline = _fetch_language_model()(normalized)
         
         dataset_records = []
-        for element, structural_tag in blob.tags:
+        for token in pipeline:
+            if not token.text.strip():
+                continue
+            
             dataset_records.append({
-                "word_item": str(element),
-                "syntactic_category": str(structural_tag),
-                "meta_description": f"Grammar code: {structural_tag}"
+                "word_item": str(token.text),
+                "syntactic_category": str(token.tag_),
+                "meta_description": f"Grammar code: {token.pos_} ({spacy.explain(token.tag_) or 'Universal Category'})"
             })
         return dataset_records
 
