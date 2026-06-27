@@ -95,12 +95,12 @@ python -m backend.app
 
 See how the application processes text into structured tokens, lemmas, and stems:
 
-![Analyze All Output](images/analyze_all.png)
+<img src="images/analyze_all.png" alt="Analyze All Results" width="600"/>
 
 ### Named Entity Recognition (NER) Results
 The application identifies and categorizes entities like Organizations, Dates, and Locations:
 
-![NER Extraction Output](images/ner_result.png)
+<img src="images/ner_result.png" alt="NER Extraction" width="600"/>
 
 ## Embeddings 
 The Vector space module transforms text into numerical arrays so mathematical similarities can be calculated.
