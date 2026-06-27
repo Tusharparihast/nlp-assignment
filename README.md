@@ -91,6 +91,17 @@ python -m backend.app
 
 **5. Entity Recognition:** The model cross-references statistical patterns to label Proper Nouns (e.g., Organizations, Locations).
 
+## Pipeline Output Demo
+
+See how the application processes text into structured tokens, lemmas, and stems:
+
+![Analyze All Output](images/analyze_all.png)
+
+### Named Entity Recognition (NER) Results
+The application identifies and categorizes entities like Organizations, Dates, and Locations:
+
+![NER Extraction Output](images/ner_result.png)
+
 ## Embeddings 
 The Vector space module transforms text into numerical arrays so mathematical similarities can be calculated.
 
@@ -99,4 +110,3 @@ The Vector space module transforms text into numerical arrays so mathematical si
 **2. Similarity Matching:** User queries are embedded using the same vocabulary space as the corpus, and cosine similarity is used to find the closest matching documents.
 
 **3. 2D Projections:** High-dimensional TF-IDF vectors can be reduced using PCA or t-SNE algorithms to be plotted visually on an X/Y axis for frontend dashboards.
-"""
